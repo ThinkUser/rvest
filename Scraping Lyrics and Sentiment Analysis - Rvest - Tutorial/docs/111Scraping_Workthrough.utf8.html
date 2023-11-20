@@ -1,0 +1,1641 @@
+<!DOCTYPE html>
+<!-- saved from url=(0047)http://stat545.com/111Scraping_Workthrough.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><script async="" src="./111Scraping_Workthrough.utf8_files/analytics.js.download"></script><script type="text/javascript" src="chrome-extension://ffljdddodmkedhkcjhpmdajhjdbkogke/js/datalayer-checker.js"></script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+
+<meta name="generator" content="pandoc">
+
+
+
+
+<title>111Scraping_Workthrough.utf8</title>
+
+<script id="console-helper-insertion" type="text/javascript" async="" src="chrome-extension://kmcbdogdandhihllalknlcjfpdjcleom/js/a.js"></script><script id="ap-analytics-inspector" type="text/javascript" async="" data-datalayer-inspector-settings="{&quot;adobe&quot;:false,&quot;blockScript&quot;:false,&quot;blocking&quot;:&quot;&quot;,&quot;classicMode&quot;:true,&quot;codeToPush&quot;:&quot;&quot;,&quot;console_only_mode&quot;:false,&quot;dataLayerName&quot;:&quot;dataLayer&quot;,&quot;dataLayerPush&quot;:&quot;&quot;,&quot;doubleclick&quot;:false,&quot;dtm&quot;:false,&quot;facebook&quot;:false,&quot;gtmId&quot;:&quot;XXXXX&quot;,&quot;hideHighlights&quot;:false,&quot;hideStack&quot;:false,&quot;hideTiming&quot;:false,&quot;hostName&quot;:&quot;analyticspros.com&quot;,&quot;hostNameRegEx&quot;:false,&quot;ignoreEvents&quot;:false,&quot;ignoreEventsRegex&quot;:&quot;&quot;,&quot;ignoreRedirects&quot;:false,&quot;injectCode&quot;:false,&quot;injectingDataLayer&quot;:false,&quot;injectingGTM&quot;:false,&quot;inspect_json_ld&quot;:true,&quot;inspectingDataLayer&quot;:true,&quot;observed_functions&quot;:[{&quot;brand&quot;:&quot;Google&quot;,&quot;func&quot;:&quot;push&quot;,&quot;logo_url&quot;:&quot;http://googletagmanager.com/favicon.ico&quot;,&quot;object&quot;:&quot;dataLayer&quot;,&quot;type&quot;:&quot;array&quot;,&quot;url_regex&quot;:[&quot;^http[s]?://[\\w-]+\\.google-analytics.com/&quot;,&quot;^http[s]?://www.googletagmanager.com/&quot;]}],&quot;other&quot;:false,&quot;other_spec&quot;:&quot;&quot;,&quot;showProperties&quot;:false,&quot;showPropertiesRegex&quot;:&quot;&quot;,&quot;tealium&quot;:false,&quot;waitForDataLayer&quot;:false,&quot;filter&quot;:&quot;~&quot;}" src="chrome-extension://kmcbdogdandhihllalknlcjfpdjcleom/js/dls.js"></script><script src="./111Scraping_Workthrough.utf8_files/jquery.min.js.download"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="./111Scraping_Workthrough.utf8_files/bootstrap.min.css" rel="stylesheet">
+<script src="./111Scraping_Workthrough.utf8_files/bootstrap.min.js.download"></script>
+<script src="./111Scraping_Workthrough.utf8_files/html5shiv.min.js.download"></script>
+<script src="./111Scraping_Workthrough.utf8_files/respond.min.js.download"></script>
+<script src="./111Scraping_Workthrough.utf8_files/tabsets.js.download"></script>
+<link href="./111Scraping_Workthrough.utf8_files/default.css" rel="stylesheet">
+<script src="./111Scraping_Workthrough.utf8_files/highlight.js.download"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-68219208-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="./111Scraping_Workthrough.utf8_files/main.css">
+<link rel="stylesheet" href="./111Scraping_Workthrough.utf8_files/nav.css">
+<link rel="stylesheet" href="./111Scraping_Workthrough.utf8_files/font-awesome.css">
+
+<script type="text/javascript" src="./111Scraping_Workthrough.utf8_files/MathJax.js.download"></script><script id="dataslayerLaunchMonitors">
+console.log('** dataslayer: injecting Launch monitors **');
+window._satellite = window._satellite || {};
+window._satellite._monitors = window._satellite._monitors || [];
+window._satellite._monitors.push({
+  ruleTriggered: function(e) {
+    window.parent.postMessage(
+      {
+        type: 'dataslayer_launchruletriggered',
+        url: window == window.parent ? window.location.href : 'iframe',
+        data: JSON.parse(JSON.stringify(e.rule)),
+      },
+      '*'
+    );
+  },
+  ruleCompleted: function(e) {
+    // console.log('** dataslayer: Launch rule completed **', e.rule);
+    var rule = JSON.parse(JSON.stringify(e.rule));
+    var sendRule = function() {
+        if (window.dataslayer) {
+            window.parent.postMessage(
+                {
+                    type: 'dataslayer_launchrulecompleted',
+                    url: window == window.parent ? window.location.href : 'iframe',
+                    data: rule,
+                },
+                '*'
+            );       
+            // console.log('** dataslayer: posted rule '+rule+'**'); 
+        } else {
+            if (document.readyState === 'complete') {
+                // console.log('** dataslayer: giving up on launch **');
+                window._dataslayerQueue = window._dataslayerQueue || [];
+                window._dataslayerQueue.push({
+                  type: 'dataslayer_launchrulecompleted',
+                  url: window == window.parent ? window.location.href : 'iframe',
+                  data: rule,
+                });
+                return;
+            } else {
+                // console.log('** dataslayer: waiting 250ms to repost rule **');
+                window.setTimeout(sendRule, 250);
+            }
+        }
+    }
+    sendRule();
+    if (
+      window._satellite &&
+      window._satellite._container &&
+      window._satellite._container.dataElements
+    ) {
+      var elementNames = Object.keys(
+        window._satellite._container.dataElements
+      ).sort(function(a, b) {
+        var nameA = a.toUpperCase();
+        var nameB = b.toUpperCase();
+
+        if (nameA < nameB) {
+          return -1;
+        } else if (nameA > nameB) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+
+      let launchElements = {};
+
+      for (var i = 0; i < elementNames.length; i++) {
+        var newElement = JSON.parse(
+          JSON.stringify(
+            window._satellite._container.dataElements[elementNames[i]]
+          )
+        );
+  
+        let cleanValue = window._satellite.getVar(elementNames[i]);
+        if (typeof cleanValue === 'function') {
+          cleanValue = '(function)';
+        } else if (
+          typeof cleanValue === 'object' &&
+          typeof cleanValue.then === 'function'
+        ) {
+          cleanValue = '(Promise)';
+        }
+        launchElements[elementNames[i]] = cleanValue;
+        // launchElements.push({
+        //   key: elementNames[i],
+        //   value: cleanValue,
+        //   element: newElement,
+        // });
+      }
+      try {
+        window.parent.postMessage(
+          {
+            type: 'dataslayer_launchdataelements',
+            data: 'found',
+            url: window == window.parent ? window.location.href : 'iframe',
+            elements: launchElements
+          },
+          '*'
+        );
+      } catch (e) {
+        console.warn(e);
+      }
+  
+    }
+  },
+  ruleConditionFailed: function(e) {
+    window.parent.postMessage(
+      {
+        type: 'dataslayer_launchrulefailed',
+        url: window == window.parent ? window.location.href : 'iframe',
+        data: JSON.parse(JSON.stringify(e.rule)),
+      },
+      '*'
+    );
+  },
+});
+</script><script type="text/javascript" id="jQStatus">if(typeof(jQuery)!=='undefined'){var event=new CustomEvent('isJQuery',{detail:'yes'});document.dispatchEvent(event);};</script><script>
+			window.SBX_dlc=window.SBX_dlc||{};
+			window.SBX_dlc.settings=JSON.parse("{\"toolBar\":false,\"consoleLog\":false,\"eventColors\":true,\"eventCustomColors\":{\"custom1\":\"\",\"custom2\":\"\",\"custom3\":\"\"},\"gtmInjectId\":\"\",\"gtmInjectRule\":\"\",\"preventDefault\":false,\"jsonDefaultViewMode\":false}");
+		</script><style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 2px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 2px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: 1em}
+.MathJax_MenuRadioCheck.RTL {right: 1em; left: auto}
+.MathJax_MenuLabel {padding: 2px 2em 4px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #CCCCCC; margin: 4px 1px 0px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: Highlight; color: HighlightText}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head>
+
+<body><div id="MathJax_Message" style="display: none;"></div>
+
+<style type="text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+<header>
+  <div class="nav">
+    <a class="nav-logo" href="http://stat545.com/index.html">
+      <img src="./111Scraping_Workthrough.utf8_files/stat545-logo-s.png" width="70px" height="70px">
+    </a>
+    <ul>
+      <li class="home"><a href="http://stat545.com/index.html">Home</a></li>
+      <li class="faq"><a href="http://stat545.com/faq.html">FAQ</a></li>
+      <li class="syllabus"><a href="http://stat545.com/syllabus.html">Syllabus</a></li>
+      <li class="topics"><a href="http://stat545.com/topics.html">Topics</a></li>
+      <li class="people"><a href="http://stat545.com/people.html">People</a></li>
+    </ul>
+  </div>
+</header>
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="http://stat545.com/111Scraping_Workthrough.html#packages">Packages</a></li>
+<li><a href="http://stat545.com/111Scraping_Workthrough.html#the-lyrics">The lyrics</a></li>
+<li><a href="http://stat545.com/111Scraping_Workthrough.html#titles">Titles</a></li>
+<li><a href="http://stat545.com/111Scraping_Workthrough.html#and-purrr">And <code>purrr</code>!</a></li>
+<li><a href="http://stat545.com/111Scraping_Workthrough.html#the-flow">The flow</a></li>
+<li><a href="http://stat545.com/111Scraping_Workthrough.html#another-artist">Another Artist</a><ul>
+<li><a href="http://stat545.com/111Scraping_Workthrough.html#bonus-sentiment-analysis">Bonus: sentiment analysis</a></li>
+</ul></li>
+<li><a href="http://stat545.com/111Scraping_Workthrough.html#what-about-the-rest">What about the rest?</a><ul>
+<li><a href="http://stat545.com/111Scraping_Workthrough.html#challenge">Challenge</a></li>
+</ul></li>
+</ul>
+</div>
+
+<p><img src="./111Scraping_Workthrough.utf8_files/maxresdefault.jpg"></p>
+<p>We are starting in this lecture, and end in the next one.</p>
+<p>The goal is to build a little collection of songs from our own preferred artist. Let’s say, it’s <em>Straight Line Stitch</em> (they are great!). A little kicker for the <a href="https://www.youtube.com/watch?v=4_5VAKdHMek">morning</a>.</p>
+<p>The <strong>highly suggested</strong> browser (or, at least, the one that I’ll be using) is <a href="https://www.mozilla.org/en-US/firefox/developer/">Firefox</a>, the developer edition.</p>
+<section id="packages" class="level2">
+<h2>Packages</h2>
+<blockquote>
+<p>Don’t be afraid of the dark you’re still held up by the stars</p>
+</blockquote>
+<p>We are going to use a bunch of the usual packages:</p>
+<pre class="r"><code class="hljs"><span class="hljs-keyword">library</span>(tidyverse)
+<span class="hljs-keyword">library</span>(magrittr)
+<span class="hljs-keyword">library</span>(purrr)
+<span class="hljs-keyword">library</span>(glue)
+<span class="hljs-keyword">library</span>(stringr)</code></pre>
+<p>and introduce a new one:</p>
+<pre class="r"><code class="hljs"><span class="hljs-keyword">library</span>(rvest)
+<span class="hljs-keyword">library</span>(xml2)</code></pre>
+<p>which is meant explicitly to scrape stuff from a webpage. We are going to use a couple more in the bonus section, if we get there.</p>
+</section>
+<section id="the-lyrics" class="level2">
+<h2>The lyrics</h2>
+<p>We are going to extract the lyrics from here: <a href="https://www.musixmatch.com/" class="uri">https://www.musixmatch.com/</a> . Chose it because it’s rather consistent, and it’s from Bologna, Italy (yeah!).</p>
+<p>The webiste offers the first 15 lyrics up front. That will do for the moment (and fixing that is not that easy). Let’s take a look <a href="https://www.musixmatch.com/artist/Straight-Line-Stitch#">here</a>.</p>
+</section>
+<section id="titles" class="level2">
+<h2>Titles</h2>
+<p>First thing first, we would like to get a list of those title. Let’s see how.</p>
+<pre class="r"><code class="hljs">url_titles &lt;- <span class="hljs-string">"https://www.musixmatch.com/artist/Straight-Line-Stitch#"</span>
+
+page_title &lt;- read_html(url_titles)</code></pre>
+<p>Now, what is this <code>page_title</code> object?</p>
+<p>let’s see:</p>
+<pre class="r"><code class="hljs">page_title</code></pre>
+<pre><code class="hljs">## {xml_document}
+## &lt;html xmlns:og="http://ogp.me/ns#" class="artist-page-page"&gt;
+## [1] &lt;head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# musixma ...
+## [2] &lt;body spellcheck="false" class=""&gt;\n  &lt;div id="fb-root"&gt;&lt;/div&gt;\n  &lt;d ...</code></pre>
+<p>OK. It’s a document. Thanks. And it’s an XML document. That’s sort of html. We’ll handle it with <code>xml2</code> and <code>rvest</code>. Let’s see a bit more of that page.</p>
+<pre class="r"><code class="hljs">page_title %&gt;% html_structure()</code></pre>
+<pre><code class="hljs">## &lt;html.artist-page-page [xmlns:og]&gt;
+##   &lt;head [prefix]&gt;
+##     &lt;style&gt;
+##       {cdata}
+##     &lt;script&gt;
+##       {cdata}
+##     &lt;script&gt;
+##       {cdata}
+##     &lt;script&gt;
+##       {cdata}
+##     &lt;script&gt;
+##       {cdata}
+##     &lt;script [async, src]&gt;
+##     &lt;script [type]&gt;
+##       {cdata}
+##     &lt;link [rel, type, href]&gt;
+##     &lt;link [rel, type, href]&gt;
+##     &lt;script&gt;
+##       {cdata}
+##     &lt;meta [name, content]&gt;
+##     &lt;meta [name, content]&gt;
+##     &lt;title&gt;
+##       {text}
+##     &lt;meta [charset]&gt;
+##     &lt;meta [http-equiv, content]&gt;
+##     &lt;meta [http-equiv, content]&gt;
+##     &lt;meta [name, content]&gt;
+##     &lt;meta [name, content]&gt;
+##     &lt;meta [name, content]&gt;
+##     &lt;meta [name, content]&gt;
+##     &lt;meta [name, content]&gt;
+##     &lt;meta [name, content]&gt;
+##     &lt;meta [name, content]&gt;
+##     &lt;link [href, rel]&gt;
+##     &lt;link [href, rel]&gt;
+##     &lt;link [href, rel]&gt;
+##     &lt;link [href, rel]&gt;
+##     &lt;link [rel, type, href, title]&gt;
+##     &lt;link [rel, href]&gt;
+##     &lt;link [rel, href]&gt;
+##     &lt;link [rel, href]&gt;
+##     &lt;meta [name, content]&gt;
+##     &lt;link [rel, href, hreflang]&gt;
+##     &lt;link [rel, href, hreflang]&gt;
+##     &lt;link [rel, href, hreflang]&gt;
+##     &lt;link [rel, href, hreflang]&gt;
+##     &lt;link [rel, href, hreflang]&gt;
+##     &lt;link [rel, href, hreflang]&gt;
+##     &lt;link [rel, href, hreflang]&gt;
+##     &lt;link [rel, href, hreflang]&gt;
+##     &lt;meta [name, content]&gt;
+##     &lt;meta [name, content]&gt;
+##     &lt;meta [name, content]&gt;
+##     &lt;meta [name, content]&gt;
+##     &lt;link [rel, sizes, href]&gt;
+##     &lt;link [rel, sizes, href]&gt;
+##     &lt;link [rel, href]&gt;
+##     &lt;meta [property, content]&gt;
+##     &lt;meta [property, content]&gt;
+##     &lt;meta [name, content]&gt;
+##     &lt;link [rel, href]&gt;
+##     &lt;link [rel, href]&gt;
+##     &lt;link [rel, href]&gt;
+##     &lt;meta [property, content]&gt;
+##     &lt;meta [property, content]&gt;
+##     &lt;meta [property, content]&gt;
+##     &lt;meta [property, content]&gt;
+##     &lt;meta [property, content]&gt;
+##     &lt;meta [property, content]&gt;
+##     &lt;meta [property, content]&gt;
+##     &lt;meta [property, content]&gt;
+##     &lt;meta [http-equiv, content]&gt;
+##     &lt;script&gt;
+##       {cdata}
+##     &lt;script&gt;
+##       {cdata}
+##     &lt;script [type]&gt;
+##       {cdata}
+##     &lt;script [type]&gt;
+##       {cdata}
+##   &lt;body. [spellcheck]&gt;
+##     {text}
+##     &lt;div#fb-root&gt;
+##     {text}
+##     &lt;div#site&gt;
+##       &lt;div#artist-page . [data-reactroot]&gt;
+##         &lt;div#header .navbar [role]&gt;
+##           &lt;nav.top-bar.desktop-bar [data-topbar]&gt;
+##             &lt;section.top-bar-section&gt;
+##               &lt;ul.title-area&gt;
+##                 &lt;li.name&gt;
+##                   &lt;h1&gt;
+##                     &lt;a#logo [href]&gt;
+##                       &lt;img [alt, width, src]&gt;
+##               &lt;ul.search-nav [role]&gt;
+##                 &lt;li.search.has-form&gt;
+##                   &lt;form&gt;
+##                     &lt;div#search-bar&gt;
+##                       &lt;input#search-input [type, placeholder, value, autocomplete]&gt;
+##                       &lt;button#search-button .button-icon&gt;
+##                         &lt;i.icon.icon-search&gt;
+##               &lt;div.top-bar-right&gt;
+##                 &lt;ul.site-nav [role]&gt;
+##                   &lt;li&gt;
+##                     &lt;a [href]&gt;
+##                       {text}
+##                   &lt;li&gt;
+##                     &lt;a [href]&gt;
+##                       {text}
+##                   &lt;li&gt;
+##                     &lt;a [href]&gt;
+##                       {text}
+##                 &lt;ul.user-nav&gt;
+##                   &lt;li&gt;
+##                     &lt;ul.user-nav-items.loggedOut&gt;
+##                       &lt;li#sign-in&gt;
+##                         &lt;a [data-external-link, href]&gt;
+##                           {text}
+##                       &lt;li#sign-up&gt;
+##                         &lt;a [data-external-link, href]&gt;
+##                           {text}
+##           &lt;nav.top-bar.mobile-top-bar&gt;
+##             &lt;ul.title-area&gt;
+##               &lt;li.offcanvas-toggler&gt;
+##                 &lt;a [href]&gt;
+##                   &lt;i.icon.icon-list&gt;
+##               &lt;li.name&gt;
+##                 &lt;h1&gt;
+##                   &lt;a [href]&gt;
+##                     &lt;img [alt, src]&gt;
+##               &lt;li.toggle-search-bar&gt;
+##                 &lt;a [href]&gt;
+##                   &lt;span&gt;
+##                     &lt;i.icon.icon-search&gt;
+##               &lt;li.search.has-form&gt;
+##                 &lt;form&gt;
+##                   &lt;div#search-bar&gt;
+##                     &lt;input#search-input [type, placeholder, value, autocomplete]&gt;
+##                     &lt;button#search-button .button-icon&gt;
+##                       &lt;i.icon.icon-search&gt;
+##                   &lt;button.button.button-link.search-bar-cancel&gt;
+##                     &lt;i.icon.icon-cross&gt;
+##           &lt;noscript&gt;
+##         &lt;div#content [role]&gt;
+##           &lt;div.artist-page.main-wrapper [itemtype]&gt;
+##             &lt;meta [content, itemprop]&gt;
+##             &lt;div.profile-header.artist-header&gt;
+##               &lt;div.main-wrapper&gt;
+##                 &lt;div.noCoverPlaceholder&gt;
+##                 &lt;div.bg&gt;
+##                 &lt;div.profile-info&gt;
+##                   &lt;div.profile-head-link&gt;
+##                     &lt;div.profile-image&gt;
+##                       &lt;img.profile-avatar.large [itemprop, src, alt]&gt;
+##                     &lt;div.profile-data&gt;
+##                       &lt;meta [itemprop, content]&gt;
+##                       &lt;meta [itemprop, content]&gt;
+##                       &lt;span.lyricsLabel&gt;
+##                         {text}
+##                       &lt;h1. [title, itemprop]&gt;
+##                         {text}
+##                       &lt;ul.genres&gt;
+##                         &lt;li&gt;
+##                           &lt;a [href]&gt;
+##                             {text}
+##                     &lt;a.verify-link [href]&gt;
+##                       {text}
+##                   &lt;button.button-primary.contribute-button&gt;
+##                     {text}
+##                     {comment}
+##                     {text}
+##                   &lt;ul.profile-head-info&gt;
+##                   &lt;span&gt;
+##                   &lt;span&gt;
+##             &lt;div.profile-content&gt;
+##               &lt;div&gt;
+##                 &lt;div.section-header&gt;
+##                   &lt;ul.tabs&gt;
+##                     &lt;li#overview .selected&gt;
+##                       &lt;a [href]&gt;
+##                         {text}
+##                     &lt;li#community .&gt;
+##                       &lt;a [href]&gt;
+##                         {text}
+##                     &lt;li#albums .&gt;
+##                       &lt;a [href]&gt;
+##                         {text}
+##                 &lt;div.tab-content&gt;
+##                   &lt;div.main-wrapper&gt;
+##                     &lt;div.main&gt;
+##                       &lt;div.row&gt;
+##                         &lt;div.main-panel&gt;
+##                           &lt;div#top-songs .box.box-style-plain&gt;
+##                             &lt;div.box-header&gt;
+##                               &lt;h3.box-title&gt;
+##                                 {text}
+##                                 {comment}
+##                                 {text}
+##                               &lt;div.actions&gt;
+##                             &lt;div.box-content&gt;
+##                               &lt;div&gt;
+##                                 &lt;div&gt;
+##                                   &lt;ul.tracks.list&gt;
+##                                     &lt;li.showPosition.showCoverart&gt;
+##                                       &lt;span.position&gt;
+##                                         {text}
+##                                       &lt;div.track-card.media-card.has-picture&gt;
+##                                         &lt;div.media-card-picture&gt;
+##                                           &lt;img [srcset, alt]&gt;
+##                                         &lt;div.media-card-body&gt;
+##                                           &lt;div.media-card-text&gt;
+##                                             &lt;h2.media-card-title&gt;
+##                                               &lt;a.title [href]&gt;
+##                                                 &lt;span&gt;
+##                                                   {text}
+##                                             &lt;h3.media-card-subtitle&gt;
+##                                               &lt;span.artist-field&gt;
+##                                                 &lt;span&gt;
+##                                                   &lt;a.artist [href]&gt;
+##                                                     {text}
+##                                         &lt;meta [content, itemprop]&gt;
+##                                         &lt;meta [content, itemprop]&gt;
+##                                         &lt;meta [content, itemprop]&gt;
+##                                         &lt;meta [content, itemprop]&gt;
+##                                     &lt;li.showPosition.showCoverart&gt;
+##                                       &lt;span.position&gt;
+##                                         {text}
+##                                       &lt;div.track-card.media-card.has-picture&gt;
+##                                         &lt;div.media-card-picture&gt;
+##                                           &lt;img [srcset, alt]&gt;
+##                                         &lt;div.media-card-body&gt;
+##                                           &lt;div.media-card-text&gt;
+##                                             &lt;h2.media-card-title&gt;
+##                                               &lt;a.title [href]&gt;
+##                                                 &lt;span&gt;
+##                                                   {text}
+##                                             &lt;h3.media-card-subtitle&gt;
+##                                               &lt;span.artist-field&gt;
+##                                                 &lt;span&gt;
+##                                                   &lt;a.artist [href]&gt;
+##                                                     {text}
+##                                         &lt;meta [content, itemprop]&gt;
+##                                         &lt;meta [content, itemprop]&gt;
+##                                         &lt;meta [content, itemprop]&gt;
+##                                         &lt;meta [content, itemprop]&gt;
+##                                     &lt;li.showPosition.showCoverart&gt;
+##                                       &lt;span.position&gt;
+##                                         {text}
+##                                       &lt;div.track-card.media-card.has-picture&gt;
+##                                         &lt;div.media-card-picture&gt;
+##                                           &lt;img [srcset, alt]&gt;
+##                                         &lt;div.media-card-body&gt;
+##                                           &lt;div.media-card-text&gt;
+##                                             &lt;h2.media-card-title&gt;
+##                                               &lt;a.title [href]&gt;
+##                                                 &lt;span&gt;
+##                                                   {text}
+##                                             &lt;h3.media-card-subtitle&gt;
+##                                               &lt;span.artist-field&gt;
+##                                                 &lt;span&gt;
+##                                                   &lt;a.artist [href]&gt;
+##                                                     {text}
+##                                         &lt;meta [content, itemprop]&gt;
+##                                         &lt;meta [content, itemprop]&gt;
+##                                         &lt;meta [content, itemprop]&gt;
+##                                         &lt;meta [content, itemprop]&gt;
+##                                     &lt;li.showPosition.showCoverart&gt;
+##                                       &lt;span.position&gt;
+##                                         {text}
+##                                       &lt;div.track-card.media-card.has-picture&gt;
+##                                         &lt;div.media-card-picture&gt;
+##                                           &lt;img [srcset, alt]&gt;
+##                                         &lt;div.media-card-body&gt;
+##                                           &lt;div.media-card-text&gt;
+##                                             &lt;h2.media-card-title&gt;
+##                                               &lt;a.title [href]&gt;
+##                                                 &lt;span&gt;
+##                                                   {text}
+##                                             &lt;h3.media-card-subtitle&gt;
+##                                               &lt;span.artist-field&gt;
+##                                                 &lt;span&gt;
+##                                                   &lt;a.artist [href]&gt;
+##                                                     {text}
+##                                         &lt;meta [content, itemprop]&gt;
+##                                         &lt;meta [content, itemprop]&gt;
+##                                         &lt;meta [content, itemprop]&gt;
+##                                         &lt;meta [content, itemprop]&gt;
+##                                     &lt;li.showPosition.showCoverart&gt;
+##                                       &lt;span.position&gt;
+##                                         {text}
+##                                       &lt;div.track-card.media-card.has-picture&gt;
+##                                         &lt;div.media-card-picture&gt;
+##                                           &lt;img [srcset, alt]&gt;
+##                                         &lt;div.media-card-body&gt;
+##                                           &lt;div.media-card-text&gt;
+##                                             &lt;h2.media-card-title&gt;
+##                                               &lt;a.title [href]&gt;
+##                                                 &lt;span&gt;
+##                                                   {text}
+##                                             &lt;h3.media-card-subtitle&gt;
+##                                               &lt;span.artist-field&gt;
+##                                                 &lt;span&gt;
+##                                                   &lt;a.artist [href]&gt;
+##                                                     {text}
+##                                         &lt;meta [content, itemprop]&gt;
+##                                         &lt;meta [content, itemprop]&gt;
+##                                         &lt;meta [content, itemprop]&gt;
+##                                         &lt;meta [content, itemprop]&gt;
+##                                     &lt;li.showPosition.showCoverart&gt;
+##                                       &lt;span.position&gt;
+##                                         {text}
+##                                       &lt;div.track-card.media-card.has-picture&gt;
+##                                         &lt;div.media-card-picture&gt;
+##                                           &lt;img [srcset, alt]&gt;
+##                                         &lt;div.media-card-body&gt;
+##                                           &lt;div.media-card-text&gt;
+##                                             &lt;h2.media-card-title&gt;
+##                                               &lt;a.title [href]&gt;
+##                                                 &lt;span&gt;
+##                                                   {text}
+##                                             &lt;h3.media-card-subtitle&gt;
+##                                               &lt;span.artist-field&gt;
+##                                                 &lt;span&gt;
+##                                                   &lt;a.artist [href]&gt;
+##                                                     {text}
+##                                         &lt;meta [content, itemprop]&gt;
+##                                         &lt;meta [content, itemprop]&gt;
+##                                         &lt;meta [content, itemprop]&gt;
+##                                         &lt;meta [content, itemprop]&gt;
+##                                     &lt;li.showPosition.showCoverart&gt;
+##                                       &lt;span.position&gt;
+##                                         {text}
+##                                       &lt;div.track-card.media-card.has-picture&gt;
+##                                         &lt;div.media-card-picture&gt;
+##                                           &lt;img [srcset, alt]&gt;
+##                                         &lt;div.media-card-body&gt;
+##                                           &lt;div.media-card-text&gt;
+##                                             &lt;h2.media-card-title&gt;
+##                                               &lt;a.title [href]&gt;
+##                                                 &lt;span&gt;
+##                                                   {text}
+##                                             &lt;h3.media-card-subtitle&gt;
+##                                               &lt;span.artist-field&gt;
+##                                                 &lt;span&gt;
+##                                                   &lt;a.artist [href]&gt;
+##                                                     {text}
+##                                         &lt;meta [content, itemprop]&gt;
+##                                         &lt;meta [content, itemprop]&gt;
+##                                         &lt;meta [content, itemprop]&gt;
+##                                         &lt;meta [content, itemprop]&gt;
+##                                     &lt;li.showPosition.showCoverart&gt;
+##                                       &lt;span.position&gt;
+##                                         {text}
+##                                       &lt;div.track-card.media-card.has-picture&gt;
+##                                         &lt;div.media-card-picture&gt;
+##                                           &lt;img [srcset, alt]&gt;
+##                                         &lt;div.media-card-body&gt;
+##                                           &lt;div.media-card-text&gt;
+##                                             &lt;h2.media-card-title&gt;
+##                                               &lt;a.title [href]&gt;
+##                                                 &lt;span&gt;
+##                                                   {text}
+##                                             &lt;h3.media-card-subtitle&gt;
+##                                               &lt;span.artist-field&gt;
+##                                                 &lt;span&gt;
+##                                                   &lt;a.artist [href]&gt;
+##                                                     {text}
+##                                         &lt;meta [content, itemprop]&gt;
+##                                         &lt;meta [content, itemprop]&gt;
+##                                         &lt;meta [content, itemprop]&gt;
+##                                         &lt;meta [content, itemprop]&gt;
+##                                     &lt;li.showPosition.showCoverart&gt;
+##                                       &lt;span.position&gt;
+##                                         {text}
+##                                       &lt;div.track-card.media-card.has-picture&gt;
+##                                         &lt;div.media-card-picture&gt;
+##                                           &lt;img [srcset, alt]&gt;
+##                                         &lt;div.media-card-body&gt;
+##                                           &lt;div.media-card-text&gt;
+##                                             &lt;h2.media-card-title&gt;
+##                                               &lt;a.title [href]&gt;
+##                                                 &lt;span&gt;
+##                                                   {text}
+##                                             &lt;h3.media-card-subtitle&gt;
+##                                               &lt;span.artist-field&gt;
+##                                                 &lt;span&gt;
+##                                                   &lt;a.artist [href]&gt;
+##                                                     {text}
+##                                         &lt;meta [content, itemprop]&gt;
+##                                         &lt;meta [content, itemprop]&gt;
+##                                         &lt;meta [content, itemprop]&gt;
+##                                         &lt;meta [content, itemprop]&gt;
+##                                     &lt;li.showPosition.showCoverart&gt;
+##                                       &lt;span.position&gt;
+##                                         {text}
+##                                       &lt;div.track-card.media-card.has-picture&gt;
+##                                         &lt;div.media-card-picture&gt;
+##                                           &lt;img [srcset, alt]&gt;
+##                                         &lt;div.media-card-body&gt;
+##                                           &lt;div.media-card-text&gt;
+##                                             &lt;h2.media-card-title&gt;
+##                                               &lt;a.title [href]&gt;
+##                                                 &lt;span&gt;
+##                                                   {text}
+##                                             &lt;h3.media-card-subtitle&gt;
+##                                               &lt;span.artist-field&gt;
+##                                                 &lt;span&gt;
+##                                                   &lt;a.artist [href]&gt;
+##                                                     {text}
+##                                         &lt;meta [content, itemprop]&gt;
+##                                         &lt;meta [content, itemprop]&gt;
+##                                         &lt;meta [content, itemprop]&gt;
+##                                         &lt;meta [content, itemprop]&gt;
+##                                     &lt;li.showPosition.showCoverart&gt;
+##                                       &lt;span.position&gt;
+##                                         {text}
+##                                       &lt;div.track-card.media-card.has-picture&gt;
+##                                         &lt;div.media-card-picture&gt;
+##                                           &lt;img [srcset, alt]&gt;
+##                                         &lt;div.media-card-body&gt;
+##                                           &lt;div.media-card-text&gt;
+##                                             &lt;h2.media-card-title&gt;
+##                                               &lt;a.title [href]&gt;
+##                                                 &lt;span&gt;
+##                                                   {text}
+##                                             &lt;h3.media-card-subtitle&gt;
+##                                               &lt;span.artist-field&gt;
+##                                                 &lt;span&gt;
+##                                                   &lt;a.artist [href]&gt;
+##                                                     {text}
+##                                         &lt;meta [content, itemprop]&gt;
+##                                         &lt;meta [content, itemprop]&gt;
+##                                         &lt;meta [content, itemprop]&gt;
+##                                         &lt;meta [content, itemprop]&gt;
+##                                     &lt;li.showPosition.showCoverart&gt;
+##                                       &lt;span.position&gt;
+##                                         {text}
+##                                       &lt;div.track-card.media-card.has-picture&gt;
+##                                         &lt;div.media-card-picture&gt;
+##                                           &lt;img [srcset, alt]&gt;
+##                                         &lt;div.media-card-body&gt;
+##                                           &lt;div.media-card-text&gt;
+##                                             &lt;h2.media-card-title&gt;
+##                                               &lt;a.title [href]&gt;
+##                                                 &lt;span&gt;
+##                                                   {text}
+##                                             &lt;h3.media-card-subtitle&gt;
+##                                               &lt;span.artist-field&gt;
+##                                                 &lt;span&gt;
+##                                                   &lt;a.artist [href]&gt;
+##                                                     {text}
+##                                         &lt;meta [content, itemprop]&gt;
+##                                         &lt;meta [content, itemprop]&gt;
+##                                         &lt;meta [content, itemprop]&gt;
+##                                         &lt;meta [content, itemprop]&gt;
+##                                     &lt;li.showPosition.showCoverart&gt;
+##                                       &lt;span.position&gt;
+##                                         {text}
+##                                       &lt;div.track-card.media-card.has-picture&gt;
+##                                         &lt;div.media-card-picture&gt;
+##                                           &lt;img [srcset, alt]&gt;
+##                                         &lt;div.media-card-body&gt;
+##                                           &lt;div.media-card-text&gt;
+##                                             &lt;h2.media-card-title&gt;
+##                                               &lt;a.title [href]&gt;
+##                                                 &lt;span&gt;
+##                                                   {text}
+##                                             &lt;h3.media-card-subtitle&gt;
+##                                               &lt;span.artist-field&gt;
+##                                                 &lt;span&gt;
+##                                                   &lt;a.artist [href]&gt;
+##                                                     {text}
+##                                         &lt;meta [content, itemprop]&gt;
+##                                         &lt;meta [content, itemprop]&gt;
+##                                         &lt;meta [content, itemprop]&gt;
+##                                         &lt;meta [content, itemprop]&gt;
+##                                     &lt;li.showPosition.showCoverart&gt;
+##                                       &lt;span.position&gt;
+##                                         {text}
+##                                       &lt;div.track-card.media-card.has-picture&gt;
+##                                         &lt;div.media-card-picture&gt;
+##                                           &lt;img [srcset, alt]&gt;
+##                                         &lt;div.media-card-body&gt;
+##                                           &lt;div.media-card-text&gt;
+##                                             &lt;h2.media-card-title&gt;
+##                                               &lt;a.title [href]&gt;
+##                                                 &lt;span&gt;
+##                                                   {text}
+##                                             &lt;h3.media-card-subtitle&gt;
+##                                               &lt;span.artist-field&gt;
+##                                                 &lt;span&gt;
+##                                                   &lt;a.artist [href]&gt;
+##                                                     {text}
+##                                         &lt;meta [content, itemprop]&gt;
+##                                         &lt;meta [content, itemprop]&gt;
+##                                         &lt;meta [content, itemprop]&gt;
+##                                         &lt;meta [content, itemprop]&gt;
+##                                     &lt;li.showPosition.showCoverart&gt;
+##                                       &lt;span.position&gt;
+##                                         {text}
+##                                       &lt;div.track-card.media-card.has-picture&gt;
+##                                         &lt;div.media-card-picture&gt;
+##                                           &lt;img [srcset, alt]&gt;
+##                                         &lt;div.media-card-body&gt;
+##                                           &lt;div.media-card-text&gt;
+##                                             &lt;h2.media-card-title&gt;
+##                                               &lt;a.title [href]&gt;
+##                                                 &lt;span&gt;
+##                                                   {text}
+##                                             &lt;h3.media-card-subtitle&gt;
+##                                               &lt;span.artist-field&gt;
+##                                                 &lt;span&gt;
+##                                                   &lt;a.artist [href]&gt;
+##                                                     {text}
+##                                         &lt;meta [content, itemprop]&gt;
+##                                         &lt;meta [content, itemprop]&gt;
+##                                         &lt;meta [content, itemprop]&gt;
+##                                         &lt;meta [content, itemprop]&gt;
+##                                 &lt;div.load-more-pager&gt;
+##                                   &lt;a.button.page-load-more [href, data-page]&gt;
+##                                     {text}
+##                         &lt;div.side-panel&gt;
+##                           &lt;div.box.box-style-plain&gt;
+##                             &lt;div.box-content&gt;
+##                               &lt;div. [style]&gt;
+##                                 &lt;div#div_gpt_ad_336x280_musixmatch_artist_sidebar_top [style]&gt;
+##                                   &lt;script [type]&gt;
+##                                     {cdata}
+##                           &lt;div#albums .box.box-style-plain&gt;
+##                             &lt;div.box-header&gt;
+##                               &lt;h3.box-title&gt;
+##                                 {text}
+##                                 {comment}
+##                                 {text}
+##                               &lt;div.actions&gt;
+##                             &lt;div.box-content&gt;
+##                               &lt;ul.song-writers&gt;
+##                                 &lt;li&gt;
+##                                   &lt;a [href]&gt;
+##                                     {text}
+##                                 &lt;li&gt;
+##                                   &lt;a [href]&gt;
+##                                     {text}
+##                                 &lt;li&gt;
+##                                   &lt;a [href]&gt;
+##                                     {text}
+##                                 &lt;li&gt;
+##                                   &lt;a [href]&gt;
+##                                     {text}
+##                                 &lt;li&gt;
+##                                   &lt;a [href]&gt;
+##                                     {text}
+##                                 &lt;li&gt;
+##                                   &lt;a [href]&gt;
+##                                     {text}
+##                                 &lt;li&gt;
+##                                   &lt;a [href]&gt;
+##                                     {text}
+##                                 &lt;li&gt;
+##                                   &lt;a [href]&gt;
+##                                     {text}
+##                                 &lt;li&gt;
+##                                   &lt;a [href]&gt;
+##                                     {text}
+##                                 &lt;li&gt;
+##                                   &lt;a [href]&gt;
+##                                     {text}
+##                           &lt;div#albums .box.box-style-plain&gt;
+##                             &lt;div.box-header&gt;
+##                               &lt;h3.box-title&gt;
+##                                 {text}
+##                                 {comment}
+##                                 {text}
+##                               &lt;div.actions&gt;
+##                                 &lt;a.see-all-action [href]&gt;
+##                                   {text}
+##                             &lt;div.box-content&gt;
+##                               &lt;ul.albums.list&gt;
+##                                 &lt;li&gt;
+##                                   &lt;div.album-card.media-card.has-picture&gt;
+##                                     &lt;div.media-card-picture&gt;
+##                                       &lt;img [srcset, alt]&gt;
+##                                     &lt;div.media-card-body&gt;
+##                                       &lt;div.media-card-text&gt;
+##                                         &lt;h2.media-card-title&gt;
+##                                           &lt;a [href]&gt;
+##                                             {text}
+##                                         &lt;h3.media-card-subtitle&gt;
+##                                           {text}
+##                                     &lt;meta [content, itemprop]&gt;
+##                                     &lt;meta [content, itemprop]&gt;
+##                                 &lt;li&gt;
+##                                   &lt;div.album-card.media-card.has-picture&gt;
+##                                     &lt;div.media-card-picture&gt;
+##                                       &lt;img [srcset, alt]&gt;
+##                                     &lt;div.media-card-body&gt;
+##                                       &lt;div.media-card-text&gt;
+##                                         &lt;h2.media-card-title&gt;
+##                                           &lt;a [href]&gt;
+##                                             {text}
+##                                         &lt;h3.media-card-subtitle&gt;
+##                                           {text}
+##                                     &lt;meta [content, itemprop]&gt;
+##                                     &lt;meta [content, itemprop]&gt;
+##                                 &lt;li&gt;
+##                                   &lt;div.album-card.media-card.has-picture&gt;
+##                                     &lt;div.media-card-picture&gt;
+##                                       &lt;img [srcset, alt]&gt;
+##                                     &lt;div.media-card-body&gt;
+##                                       &lt;div.media-card-text&gt;
+##                                         &lt;h2.media-card-title&gt;
+##                                           &lt;a [href]&gt;
+##                                             {text}
+##                                         &lt;h3.media-card-subtitle&gt;
+##                                           {text}
+##                                     &lt;meta [content, itemprop]&gt;
+##                                     &lt;meta [content, itemprop]&gt;
+##                                 &lt;li&gt;
+##                                   &lt;div.album-card.media-card.has-picture&gt;
+##                                     &lt;div.media-card-picture&gt;
+##                                       &lt;img [srcset, alt]&gt;
+##                                     &lt;div.media-card-body&gt;
+##                                       &lt;div.media-card-text&gt;
+##                                         &lt;h2.media-card-title&gt;
+##                                           &lt;a [href]&gt;
+##                                             {text}
+##                                         &lt;h3.media-card-subtitle&gt;
+##                                           {text}
+##                                     &lt;meta [content, itemprop]&gt;
+##                                     &lt;meta [content, itemprop]&gt;
+##                                 &lt;li&gt;
+##                                   &lt;div.album-card.media-card.has-picture&gt;
+##                                     &lt;div.media-card-picture&gt;
+##                                       &lt;img [srcset, alt]&gt;
+##                                     &lt;div.media-card-body&gt;
+##                                       &lt;div.media-card-text&gt;
+##                                         &lt;h2.media-card-title&gt;
+##                                           &lt;a [href]&gt;
+##                                             {text}
+##                                         &lt;h3.media-card-subtitle&gt;
+##                                           {text}
+##                                     &lt;meta [content, itemprop]&gt;
+##                                     &lt;meta [content, itemprop]&gt;
+##         &lt;span&gt;
+##         &lt;div#footer&gt;
+##           &lt;div.main-wrapper&gt;
+##             &lt;div.footer-container&gt;
+##               &lt;div.mxm-footer__sitemap&gt;
+##                 &lt;div.mxm-footer__sitemap-logo&gt;
+##                   &lt;div.mui-logo&gt;
+##                     &lt;a.mui-logo__link [href]&gt;
+##                       &lt;img.mui-logo__img [src, alt, width]&gt;
+##                   &lt;div.mxm-footer__language&gt;
+##                     &lt;button#language-menu .small.button.dropdown&gt;
+##                       {text}
+##               &lt;div.mxm-footer__sitemap-links&gt;
+##                 &lt;h4&gt;
+##                   {text}
+##                 &lt;ul&gt;
+##                   &lt;li&gt;
+##                     &lt;a [data-external-link, target, href]&gt;
+##                       {text}
+##                   &lt;li&gt;
+##                     &lt;a [data-external-link, target, href]&gt;
+##                       {text}
+##                   &lt;li&gt;
+##                     &lt;a [data-external-link, target, href]&gt;
+##                       {text}
+##                   &lt;li&gt;
+##                     &lt;a [data-external-link, target, href]&gt;
+##                       {text}
+##                   &lt;li&gt;
+##                     &lt;a [data-external-link, target, href]&gt;
+##                       {text}
+##               &lt;div.mxm-footer__sitemap-links&gt;
+##                 &lt;h4&gt;
+##                   {text}
+##                 &lt;ul&gt;
+##                   &lt;li&gt;
+##                     &lt;a [data-external-link, target, href]&gt;
+##                       {text}
+##                   &lt;li&gt;
+##                     &lt;a [data-external-link, target, href]&gt;
+##                       {text}
+##                   &lt;li&gt;
+##                     &lt;a [data-external-link, target, href]&gt;
+##                       {text}
+##                   &lt;li&gt;
+##                     &lt;a [data-external-link, target, href]&gt;
+##                       {text}
+##               &lt;div.mxm-footer__sitemap-links&gt;
+##                 &lt;h4&gt;
+##                   {text}
+##                 &lt;ul&gt;
+##                   &lt;li&gt;
+##                     &lt;a [data-external-link, target, href]&gt;
+##                       {text}
+##                   &lt;li&gt;
+##                     &lt;a [data-external-link, target, href]&gt;
+##                       {text}
+##                       {comment}
+##                       {text}
+##                       &lt;span.label.label-primary.text-uppercase&gt;
+##                         {text}
+##                   &lt;li&gt;
+##                     &lt;a [href]&gt;
+##                       {text}
+##                   &lt;li&gt;
+##                     &lt;a [data-external-link, href]&gt;
+##                       {text}
+##                   &lt;li&gt;
+##                     &lt;a [data-external-link, target, href]&gt;
+##                       {text}
+##             &lt;div.mxm-footer__footer-language&gt;
+##               &lt;button#language-menu .small.button.dropdown&gt;
+##                 {text}
+##             &lt;div.mxm-footer__footnote&gt;
+##               &lt;div.copyright&gt;
+##                 &lt;span&gt;
+##                   {text}
+##                 &lt;span.mxm-footer__footnote-dash&gt;
+##                   {text}
+##                 &lt;ul [itemtype]&gt;
+##                   &lt;link [itemprop, href]&gt;
+##                   &lt;li&gt;
+##                     &lt;a.social-icon.fb-icon [target, href, itemprop, type]&gt;
+##                       &lt;i.icon.icon-facebook2&gt;
+##                   &lt;li&gt;
+##                     &lt;a.social-icon.tw-icon [target, href, itemprop, type]&gt;
+##                       &lt;i.icon.icon-twitter&gt;
+##                   &lt;li&gt;
+##                     &lt;a.social-icon.googleplus-icon [target, href, itemprop, type]&gt;
+##                       &lt;i.icon.icon-googleplus&gt;
+##                   &lt;li&gt;
+##                     &lt;a.social-icon.youtube-icon [target, href, itemprop, type]&gt;
+##                       &lt;i.icon.icon-youtube2&gt;
+##                   &lt;li&gt;
+##                     &lt;a.social-icon.pinterest-icon [target, href, itemprop, type]&gt;
+##                       &lt;i.icon.icon-pinterest&gt;
+##                   &lt;li&gt;
+##                     &lt;a.social-icon.instagram-icon [target, href, itemprop, type]&gt;
+##                       &lt;i.icon.icon-instagram&gt;
+##               &lt;p&gt;
+##                 {text}
+##         &lt;span&gt;
+##     {text}
+##     &lt;script&gt;
+##       {cdata}
+##     &lt;script [async, src]&gt;
+##     &lt;script&gt;
+##       {cdata}</code></pre>
+<p>Wait, whaaaaaat?</p>
+<p><img src="./111Scraping_Workthrough.utf8_files/giphy.gif"></p>
+<p>To the browser! Look at that “class” tags: they are <em>css selectors</em>, and we will use them as handles to navigate into the extremely complex list that we get from a web page.</p>
+<p>Sometimes, we can be lucky. For example, the css selector for the titles are in the class “.title”. Let’s see.</p>
+<pre class="r"><code class="hljs">page_title %&gt;%
+  html_nodes(<span class="hljs-string">".title"</span>)</code></pre>
+<pre><code class="hljs">## {xml_nodeset (15)}
+##  [1] &lt;a class="title" href="/lyrics/Straight-Line-Stitch/Laughing-In-The ...
+##  [2] &lt;a class="title" href="/lyrics/Straight-Line-Stitch/Black-Veil"&gt;&lt;sp ...
+##  [3] &lt;a class="title" href="/lyrics/Straight-Line-Stitch/Never-Surrender ...
+##  [4] &lt;a class="title" href="/lyrics/Straight-Line-Stitch/What-You-Do-to- ...
+##  [5] &lt;a class="title" href="/lyrics/Straight-Line-Stitch/Taste-of-Ashes" ...
+##  [6] &lt;a class="title" href="/lyrics/Straight-Line-Stitch/Conversion"&gt;&lt;sp ...
+##  [7] &lt;a class="title" href="/lyrics/Straight-Line-Stitch/Promise-Me"&gt;&lt;sp ...
+##  [8] &lt;a class="title" href="/lyrics/Straight-Line-Stitch/Bar-Room-Brawl" ...
+##  [9] &lt;a class="title" href="/lyrics/Straight-Line-Stitch/One-Reason"&gt;&lt;sp ...
+## [10] &lt;a class="title" href="/lyrics/Straight-Line-Stitch/Yesterday-s-Gon ...
+## [11] &lt;a class="title" href="/lyrics/Straight-Line-Stitch/Eucharist"&gt;&lt;spa ...
+## [12] &lt;a class="title" href="/lyrics/Straight-Line-Stitch/Adult-Cinema"&gt;&lt; ...
+## [13] &lt;a class="title" href="/lyrics/Straight-Line-Stitch/Living-Dead"&gt;&lt;s ...
+## [14] &lt;a class="title" href="/lyrics/Straight-Line-Stitch/Bleeding-Heart- ...
+## [15] &lt;a class="title" href="/lyrics/Straight-Line-Stitch/Cold-Front"&gt;&lt;sp ...</code></pre>
+<p>That’s still quite a mess: we have too much stuff, such as some links (called “href”) and more text than we need. Let’s clean it up with <code>html_text()</code></p>
+<pre class="r"><code class="hljs">page_title %&gt;%
+  html_nodes(<span class="hljs-string">".title"</span>) %&gt;%
+  html_text()</code></pre>
+<pre><code class="hljs">##  [1] "Laughing In The Rearview" "Black Veil"              
+##  [3] "Never Surrender"          "What You Do to Me"       
+##  [5] "Taste of Ashes"           "Conversion"              
+##  [7] "Promise Me"               "Bar Room Brawl"          
+##  [9] "One Reason"               "Yesterday's Gone"        
+## [11] "Eucharist"                "Adult Cinema"            
+## [13] "Living Dead"              "Bleeding Heart Theory"   
+## [15] "Cold Front"</code></pre>
+<p>Wundebar! Now we have 15 song titles. But we want the lyrics! Let’s do better.</p>
+<pre class="r"><code class="hljs">SLS_df &lt;- data_frame(Band = <span class="hljs-string">"Straight Line Stitch"</span>,
+                     Title = page_title %&gt;%
+                       html_nodes(<span class="hljs-string">".title"</span>) %&gt;%
+                       html_text())</code></pre>
+<p>Now we are going to use a bit of string magic</p>
+<pre class="r"><code class="hljs">SLS_lyrics &lt;- SLS_df %&gt;% mutate(Link = glue(<span class="hljs-string">'https://www.musixmatch.com/lyrics/{Band}/{Title}'</span>) %&gt;%
+                           str_replace_all(<span class="hljs-string">" "</span>,<span class="hljs-string">"-"</span>))</code></pre>
+<p>It seems it works.</p>
+<p>There is a better trick to do this job. If we look again at what we get when we select the <code>.title</code> you may see that the <em>actual</em> link is there, coded as <code>href</code>. Can we extract that? Yes we can!</p>
+<pre class="r"><code class="hljs">page_title %&gt;%
+  html_nodes(<span class="hljs-string">".title"</span>) %&gt;%
+  html_attrs() %&gt;%
+  glimpse()</code></pre>
+<pre><code class="hljs">## List of 15
+##  $ : Named chr [1:2] "title" "/lyrics/Straight-Line-Stitch/Laughing-In-The-Rearview"
+##   ..- attr(*, "names")= chr [1:2] "class" "href"
+##  $ : Named chr [1:2] "title" "/lyrics/Straight-Line-Stitch/Black-Veil"
+##   ..- attr(*, "names")= chr [1:2] "class" "href"
+##  $ : Named chr [1:2] "title" "/lyrics/Straight-Line-Stitch/Never-Surrender"
+##   ..- attr(*, "names")= chr [1:2] "class" "href"
+##  $ : Named chr [1:2] "title" "/lyrics/Straight-Line-Stitch/What-You-Do-to-Me"
+##   ..- attr(*, "names")= chr [1:2] "class" "href"
+##  $ : Named chr [1:2] "title" "/lyrics/Straight-Line-Stitch/Taste-of-Ashes"
+##   ..- attr(*, "names")= chr [1:2] "class" "href"
+##  $ : Named chr [1:2] "title" "/lyrics/Straight-Line-Stitch/Conversion"
+##   ..- attr(*, "names")= chr [1:2] "class" "href"
+##  $ : Named chr [1:2] "title" "/lyrics/Straight-Line-Stitch/Promise-Me"
+##   ..- attr(*, "names")= chr [1:2] "class" "href"
+##  $ : Named chr [1:2] "title" "/lyrics/Straight-Line-Stitch/Bar-Room-Brawl"
+##   ..- attr(*, "names")= chr [1:2] "class" "href"
+##  $ : Named chr [1:2] "title" "/lyrics/Straight-Line-Stitch/One-Reason"
+##   ..- attr(*, "names")= chr [1:2] "class" "href"
+##  $ : Named chr [1:2] "title" "/lyrics/Straight-Line-Stitch/Yesterday-s-Gone"
+##   ..- attr(*, "names")= chr [1:2] "class" "href"
+##  $ : Named chr [1:2] "title" "/lyrics/Straight-Line-Stitch/Eucharist"
+##   ..- attr(*, "names")= chr [1:2] "class" "href"
+##  $ : Named chr [1:2] "title" "/lyrics/Straight-Line-Stitch/Adult-Cinema"
+##   ..- attr(*, "names")= chr [1:2] "class" "href"
+##  $ : Named chr [1:2] "title" "/lyrics/Straight-Line-Stitch/Living-Dead"
+##   ..- attr(*, "names")= chr [1:2] "class" "href"
+##  $ : Named chr [1:2] "title" "/lyrics/Straight-Line-Stitch/Bleeding-Heart-Theory"
+##   ..- attr(*, "names")= chr [1:2] "class" "href"
+##  $ : Named chr [1:2] "title" "/lyrics/Straight-Line-Stitch/Cold-Front"
+##   ..- attr(*, "names")= chr [1:2] "class" "href"</code></pre>
+<p>In particular, we want the element called <code>href</code>. Hey, we can get that with <code>map</code>!</p>
+<pre class="r"><code class="hljs">page_title %&gt;%
+  html_nodes(<span class="hljs-string">".title"</span>) %&gt;%
+  html_attrs() %&gt;%
+  map_chr(<span class="hljs-string">"href"</span>)</code></pre>
+<pre><code class="hljs">##  [1] "/lyrics/Straight-Line-Stitch/Laughing-In-The-Rearview"
+##  [2] "/lyrics/Straight-Line-Stitch/Black-Veil"              
+##  [3] "/lyrics/Straight-Line-Stitch/Never-Surrender"         
+##  [4] "/lyrics/Straight-Line-Stitch/What-You-Do-to-Me"       
+##  [5] "/lyrics/Straight-Line-Stitch/Taste-of-Ashes"          
+##  [6] "/lyrics/Straight-Line-Stitch/Conversion"              
+##  [7] "/lyrics/Straight-Line-Stitch/Promise-Me"              
+##  [8] "/lyrics/Straight-Line-Stitch/Bar-Room-Brawl"          
+##  [9] "/lyrics/Straight-Line-Stitch/One-Reason"              
+## [10] "/lyrics/Straight-Line-Stitch/Yesterday-s-Gone"        
+## [11] "/lyrics/Straight-Line-Stitch/Eucharist"               
+## [12] "/lyrics/Straight-Line-Stitch/Adult-Cinema"            
+## [13] "/lyrics/Straight-Line-Stitch/Living-Dead"             
+## [14] "/lyrics/Straight-Line-Stitch/Bleeding-Heart-Theory"   
+## [15] "/lyrics/Straight-Line-Stitch/Cold-Front"</code></pre>
+<p>Or, even better, by letting <code>rves</code> do the job for us:</p>
+<pre class="r"><code class="hljs">page_title %&gt;%
+  html_nodes(<span class="hljs-string">".title"</span>) %&gt;%
+  html_attr(<span class="hljs-string">"href"</span>)</code></pre>
+<pre><code class="hljs">##  [1] "/lyrics/Straight-Line-Stitch/Laughing-In-The-Rearview"
+##  [2] "/lyrics/Straight-Line-Stitch/Black-Veil"              
+##  [3] "/lyrics/Straight-Line-Stitch/Never-Surrender"         
+##  [4] "/lyrics/Straight-Line-Stitch/What-You-Do-to-Me"       
+##  [5] "/lyrics/Straight-Line-Stitch/Taste-of-Ashes"          
+##  [6] "/lyrics/Straight-Line-Stitch/Conversion"              
+##  [7] "/lyrics/Straight-Line-Stitch/Promise-Me"              
+##  [8] "/lyrics/Straight-Line-Stitch/Bar-Room-Brawl"          
+##  [9] "/lyrics/Straight-Line-Stitch/One-Reason"              
+## [10] "/lyrics/Straight-Line-Stitch/Yesterday-s-Gone"        
+## [11] "/lyrics/Straight-Line-Stitch/Eucharist"               
+## [12] "/lyrics/Straight-Line-Stitch/Adult-Cinema"            
+## [13] "/lyrics/Straight-Line-Stitch/Living-Dead"             
+## [14] "/lyrics/Straight-Line-Stitch/Bleeding-Heart-Theory"   
+## [15] "/lyrics/Straight-Line-Stitch/Cold-Front"</code></pre>
+<pre class="r"><code class="hljs">SLS_df %&lt;&gt;%
+  mutate(Link = page_title %&gt;%
+  html_nodes(<span class="hljs-string">".title"</span>) %&gt;%
+  html_attr(<span class="hljs-string">"href"</span>))</code></pre>
+<p>Cool, we don’t gain much in terms of line of code, but it will be usefull later!</p>
+</section>
+<section id="and-purrr" class="level2">
+<h2>And <code>purrr</code>!</h2>
+<p>Cool, now we want to put grab all lyrics. Let’s start with one at a time. What is the url we want?</p>
+<pre class="r"><code class="hljs">url_song &lt;- glue(<span class="hljs-string">"https://www.musixmatch.com{SLS_df$Link[1]}"</span>)
+
+url_song</code></pre>
+<pre><code class="hljs">## https://www.musixmatch.com/lyrics/Straight-Line-Stitch/Laughing-In-The-Rearview</code></pre>
+<p>And let’s grab the lyrics for that song. The content is marked by a css selector called “p.mxm-lyrics__content“. That stands for”p“, an object of class paragraph, plus”mxm-lyrics__content“, the specific class for the lyrics.</p>
+<pre class="r"><code class="hljs">url_song %&gt;%
+  read_html() %&gt;%
+  html_nodes(<span class="hljs-string">".mxm-lyrics__content"</span>) %&gt;%
+  html_text()</code></pre>
+<pre><code class="hljs">## [1] "You never say what you mean, mean what you say\n\nPick up the pieces"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+## [2] "And heal the pain of your cruelty\nMaybe one day you'll be able to say\nThat you're truly free but there's no guarantee\n\nIt's always the same everywhere you go\nWelcome to the slide-show\nRight up front for the whole world to see your display\nYou will never get away\n\nYou never say what you mean, mean what you say\nI'll blow you away, blow you away\nShot down in a blaze now you're lost\nWithout a trace, without a trace\n\nBut don't get caught\nOut by the undertow, out by the undertow\nBecause today is the day that you'll never\nNever escape, never escape\n\nI hope you see my face as clear as day\nAnd it continues to haunt you\nMaybe someday you'll be able to breakthrough\nBut you don't have that kind of virtue\n\nIt's always the same every time I move\nLike you got something to prove, something to prove\nYou think I'd lose my edge over the third degree\nExcuse me if I disagree\n\nYou never say what you mean, mean what you say\nI'll blow you away, blow you away\nShot down in a blaze now you're lost\nWithout a trace, without a trace\n\nBut don't get caught\nOut by the undertow, out by the undertow\nBecause today is the day that you'll never\nNever escape, never escape\n\nYou'll never escape\nYou turned your back on me\nYou turned your back on me\n\nYou'll never, never escape\nYou'll never, never escape\nYou'll never, never escape\nYou'll never, never escape"</code></pre>
+<p>Ach, notice that it comes in different blocks: one for each section of text, broken by the advertisment. Well, we can just <code>collapse()</code> them together with <code>glue</code>. As we are doing this, let’s turn that flow into a function:</p>
+<pre class="r"><code class="hljs">get_lyrics &lt;- <span class="hljs-keyword">function</span>(link){
+  
+  lyrics_chunks &lt;- glue(<span class="hljs-string">"https://www.musixmatch.com{link}#"</span>) %&gt;%
+   read_html() %&gt;%
+   html_nodes(<span class="hljs-string">".mxm-lyrics__content"</span>)
+  
+  <span class="hljs-comment"># we do a sanity check to see that there's something inside the lyrics!</span>
+  stopifnot(length(lyrics_chunks) &gt; <span class="hljs-number">0</span>)
+  
+  lyrics &lt;- lyrics_chunks %&gt;%
+   html_text() %&gt;%
+   collapse(sep = <span class="hljs-string">"\n"</span>)
+  
+  <span class="hljs-keyword">return</span>(lyrics)
+}</code></pre>
+<p>Let’s test it!</p>
+<pre class="r"><code class="hljs">SLS_df$Link[<span class="hljs-number">3</span>] %&gt;%
+  get_lyrics() %&gt;%
+  glue() <span class="hljs-comment"># we paste into glue to get the nice formatting</span></code></pre>
+<pre><code class="hljs">## Out from the darkness into the light
+## I opened up my eyes, awakened by the sight
+## Of the walls that are closing in, it's happening again
+## Just another black cloud that's become my only friend
+## 
+## Bring it up, brother, no one said it'd be easy
+## And you don't have to believe me when I tell you
+## It's not over, it's not over
+## 
+## I've gone too far to back down now
+## Gotta finish what I started
+## It's not over, no, it's not over
+## 
+## So hold on, said we'll never surrender
+## If there's a chance of losing more then let it go
+## So hold on, said we'll never surrender
+## If there's a chance of losing more then let it go
+## 
+## Another sleepless night alone and I can't do this on my own
+## I'm reaching out to touch the one just like me
+## But no one seems to hear my voice
+## It echoes across the void, shattering with the noise
+## 
+## Bring it on, this is the day for redemption
+## You don't have to wake him
+## Whether we're wrong or if we're right
+## Whether we're wrong or if we're right
+## 
+## I've gone too far to back down now
+## Gotta finish what I started
+## It's not over, no, it's not over
+## 
+## So hold on, said we'll never surrender
+## If there's a chance of losing more then let it go
+## So hold on, said we'll never surrender
+## If there's a chance of losing more then let it go
+## So hold on
+## 
+## This is the fight of our lives
+## So hold on
+## With all the [Incomprehensible]
+## Hold on, hold on, hold on, hold on
+## 
+## So hold on, said we'll never surrender
+## If there's a chance of losing more then let it go
+## So hold on, said we'll never surrender
+## If there's a chance of losing more then let it go
+## 
+## Hold on, hold on</code></pre>
+<p>Now we can use purrr to map that function over our dataframe!</p>
+<pre class="r"><code class="hljs">SLS_df %&lt;&gt;%
+  mutate(Lyrics = map_chr(Link, get_lyrics))</code></pre>
+<p>Ok, here we were quite lucky, as all the links were right. In general we may want to play safe, and use a <code>possibly</code> wrapper so not to have to stop everything in case something bad happens.</p>
+</section>
+<section id="the-flow" class="level2">
+<h2>The flow</h2>
+<p><strong>Explore, try, test, automatize, test.</strong></p>
+<p>Scraping data from the web will require a lot of trial and error. In general, I like this flow: I explore the pages that I want to scrape, trying to identify patterns that I can exploit. Then I try, on a smaller subset, and I test if it worked. Then I automatize it, using <code>purrr</code> or something similar. And finally some more testing.</p>
+</section>
+<section id="another-artist" class="level2">
+<h2>Another Artist</h2>
+<p>Let’s do this for Angel Haze. Notice that here we <strong>have</strong> to use the attributes from the web page, as the name of the authors of the lyrics is not always the same (the <code>glue</code> approach would fail).</p>
+<pre class="r"><code class="hljs">AH_url &lt;- <span class="hljs-string">"https://www.musixmatch.com/artist/Angel-Haze"</span>
+
+AH_lyrics &lt;- data_frame(Band = <span class="hljs-string">"Angel Haze"</span>,
+                        
+                         Title = AH_url %&gt;%
+                          read_html() %&gt;%
+                           html_nodes(css = <span class="hljs-string">".title"</span>) %&gt;%
+                           html_text(),
+                        
+                         Link = AH_url %&gt;%
+                          read_html() %&gt;%
+                           html_nodes(css = <span class="hljs-string">".title"</span>) %&gt;%
+                          html_attr(<span class="hljs-string">"href"</span>),
+                        
+                        Lyrics = map_chr(Link,get_lyrics))</code></pre>
+<section id="bonus-sentiment-analysis" class="level3">
+<h3>Bonus: sentiment analysis</h3>
+<p>The idea is to attribute to each word a score, expressing wether it’s more negative and positive, and then to sum up. To do this, we are going to use Julia Silge’s and David Robinson’s great <a href="https://github.com/juliasilge/tidytext"><em>Tidytext</em></a> library and a <em>vocabulary</em> of words for which we have the scores (there are different options, we are using “afinn”).</p>
+<pre class="r"><code class="hljs"><span class="hljs-keyword">library</span>(tidytext)
+afinn &lt;- get_sentiments(<span class="hljs-string">"afinn"</span>)</code></pre>
+<p>Now, a bit of massaging: we breaks the lyrics into their words, remove the words that are considered not interesting (they are called “stop words”), stitch the dataframe to the scoress from afinn, and do the math for each song.</p>
+<pre class="r"><code class="hljs">SLS_df %&gt;%
+  unnest_tokens(word, Lyrics) %&gt;% <span class="hljs-comment">#split words</span>
+  anti_join(stop_words, by = <span class="hljs-string">"word"</span>) %&gt;% <span class="hljs-comment">#remove dull words</span>
+  inner_join(afinn, by = <span class="hljs-string">"word"</span>) %&gt;% <span class="hljs-comment">#stitch scores</span>
+  group_by(Title) %&gt;% <span class="hljs-comment">#and for each song</span>
+  summarise(Length = n(), <span class="hljs-comment">#do the math</span>
+    Score = sum(score)/Length) %&gt;%
+  arrange(-Score)</code></pre>
+<pre><code class="hljs">## # A tibble: 15 x 3
+##                       Title Length       Score
+##                       &lt;chr&gt;  &lt;int&gt;       &lt;dbl&gt;
+##  1               Promise Me     17  0.23529412
+##  2         Yesterday's Gone     15  0.20000000
+##  3        What You Do to Me     17  0.17647059
+##  4              Living Dead     26  0.07692308
+##  5                Eucharist      9  0.00000000
+##  6           Bar Room Brawl     22 -0.04545455
+##  7               Black Veil     13 -0.07692308
+##  8          Never Surrender     18 -0.55555556
+##  9               Cold Front     12 -0.58333333
+## 10           Taste of Ashes     16 -0.68750000
+## 11 Laughing In The Rearview     19 -0.78947368
+## 12               One Reason     10 -0.90000000
+## 13               Conversion     15 -1.46666667
+## 14    Bleeding Heart Theory     14 -1.92857143
+## 15             Adult Cinema      2 -3.00000000</code></pre>
+<p>So, what was the most positive song?</p>
+<pre class="r"><code class="hljs">SLS_df %&gt;%
+  filter(Title == <span class="hljs-string">"Promise Me"</span>) %$%
+  Lyrics %&gt;%
+  glue()</code></pre>
+<pre><code class="hljs">## This is the last day
+## The last day that I sway
+## No longer will you dictate what I do or say
+## I've taken a leave of absence
+## I've taken a leave of the senses
+## And there's nothing in the world that could change this
+## I can't change this
+## No regrets
+## I'm calling on you angels of truth
+## Tell me that you'll never fall through
+## Promise me Promise me
+## Don't crumble like paper mache’
+## Tell me that you'll always find your way
+## Promise me Promise me
+## This is the last day
+## The last day that I sway
+## No longer will they dictate what I do or say
+## Not another dying day
+## A part of me that's wasted away
+## And there's nothing in the world that could change this
+## You can't change this
+## No regrets
+## I'm calling on you angels of truth
+## Tell me that you'll never fall through
+## Promise me Promise me
+## Don't crumble like paper mache’
+## Tell me that you'll always find your way
+## Promise me Promise me
+## Standing on the sidelines
+## Where I've been left behind
+## Right here on the sidelines
+## Waiting for the right time
+## And life goes by
+## Life goes by
+## I'm calling on you angels of truth
+## Tell me that you'll never fall through
+## Promise me Promise me
+## Don't crumble like paper mache’
+## Tell me that you'll always find your way
+## Promise me Promise me
+## This is the last day
+## And life goes by</code></pre>
+<p>And we can easily do the same with Angela Haze:</p>
+<pre class="r"><code class="hljs">AH_lyrics %&gt;%
+  unnest_tokens(word, Lyrics) %&gt;% <span class="hljs-comment">#split words</span>
+  anti_join(stop_words, by = <span class="hljs-string">"word"</span>) %&gt;% <span class="hljs-comment">#remove dull words</span>
+  inner_join(afinn, by = <span class="hljs-string">"word"</span>) %&gt;% <span class="hljs-comment">#stitch scores</span>
+  group_by(Title) %&gt;% <span class="hljs-comment">#and for each song</span>
+  summarise(Length = n(), <span class="hljs-comment">#do the math</span>
+    Score = sum(score)/Length) %&gt;%
+  arrange(-Score)</code></pre>
+<pre><code class="hljs">## # A tibble: 15 x 3
+##                                                      Title Length
+##                                                      &lt;chr&gt;  &lt;int&gt;
+##  1                                      Pleasure This Pain     50
+##  2                                              I Love You     15
+##  3                                              Shit, Man!     12
+##  4                                                    NSFW     35
+##  5                                              Battle Cry     56
+##  6                                            Black Dahlia     76
+##  7                                       Hell Could Freeze     40
+##  8                                           Sing About Me     28
+##  9                                                 Ribcage      9
+## 10                                                 On Fire     41
+## 11 Weapon (Bastille vs. Angel Haze vs. F*U*G*Z vs. Braque)     25
+## 12                                                  Weapon     22
+## 13 Weapon (Bastille Vs. Angel Haze Vs. F*U*G*Z Vs. Braque)     22
+## 14                                          22 Jump Street     25
+## 15                                                   D-Day     18
+## # ... with 1 more variables: Score &lt;dbl&gt;</code></pre>
+<p>More resources about Sentiment Analysis (with Tidytext) are available <a href="http://varianceexplained.org/r/yelp-sentiment/">here</a> and <a href="http://www.jakubglinka.com/2017-03-01-text_mining_part1/">here</a>.</p>
+</section>
+</section>
+<section id="what-about-the-rest" class="level2">
+<h2>What about the rest?</h2>
+<p>We want to do it also for other artists. Best things is to turn some of those scripts into functions. Let’s try with <em>Billie Holiday</em> and <em>A Tribe Called Red</em> (I picked them ’cause they are great, and also because they will show some limitations of the code I’m interested to tackle).</p>
+<p>When we are about to do something over over, it’s better to write functions. So, let’s do it!</p>
+<pre class="r"><code class="hljs">get_words &lt;- <span class="hljs-keyword">function</span>(band_name){
+
+  <span class="hljs-comment"># remove white space from band name</span>
+  collapsed_name &lt;- str_replace_all(band_name, <span class="hljs-string">" "</span>, <span class="hljs-string">"-"</span>) 
+  
+  <span class="hljs-comment"># define url to get the title and links</span>
+  url &lt;- glue(<span class="hljs-string">"https://www.musixmatch.com/artist/{collapsed_name}"</span>)
+  
+  <span class="hljs-comment"># read title page and extract the title chunks </span>
+  title_page &lt;- url %&gt;%
+    read_html() %&gt;%
+    html_nodes(css = <span class="hljs-string">".title"</span>)
+  
+  <span class="hljs-comment"># and build the dataframe</span>
+  lyrics &lt;- data_frame(Band = band_name,
+                       <span class="hljs-comment"># extract text title</span>
+                       Title = title_page %&gt;%
+                           html_text(),
+                       <span class="hljs-comment"># extract title link</span>
+                       Link =  title_page %&gt;%
+                          html_attr(<span class="hljs-string">"href"</span>),
+                       <span class="hljs-comment"># map to get lyrics</span>
+                       Lyrics = map_chr(Link,get_lyrics))
+  
+  <span class="hljs-keyword">return</span>(lyrics)
+}</code></pre>
+<p>And the sentiment analysis:</p>
+<pre class="r"><code class="hljs">get_soul &lt;- <span class="hljs-keyword">function</span>(Lyrics_df) {
+  Lyrics_df %&gt;%
+    unnest_tokens(word, Lyrics) %&gt;% <span class="hljs-comment">#split words</span>
+    <span class="hljs-comment">#anti_join(stop_words, by = "word") %&gt;% #remove dull words</span>
+    inner_join(afinn, by = <span class="hljs-string">"word"</span>) %&gt;% <span class="hljs-comment">#stitch scores</span>
+    group_by(Title) %&gt;% <span class="hljs-comment">#and for each song</span>
+    summarise(Length = n(), <span class="hljs-comment">#do the math</span>
+      Score = sum(score)/Length) %&gt;%
+    arrange(-Score) %&gt;%
+    <span class="hljs-keyword">return</span>()
+}</code></pre>
+<p>Let’s see if it works:</p>
+<pre class="r"><code class="hljs">Billie_words &lt;- <span class="hljs-string">"Billie Holiday"</span> %&gt;% get_words()
+Billie_sentiment &lt;- Billie_words %&gt;% get_soul()</code></pre>
+<p>Most positive song:</p>
+<iframe width="560" height="315" src="./111Scraping_Workthrough.utf8_files/HxG6K59FUGQ.html" frameborder="0" allowfullscreen="">
+</iframe>
+<p>and most negative <iframe width="560" height="315" src="./111Scraping_Workthrough.utf8_files/EIgVCU19pjg.html" frameborder="0" allowfullscreen=""></iframe></p>
+<p>It works for me! Let’s finally with <em>A Tribe Called Red</em>.</p>
+<pre class="r"><code class="hljs">ATCR_words &lt;- <span class="hljs-string">"A Tribe Called Red"</span> %&gt;% get_words()</code></pre>
+<p>Uuuh, we get an error now! What the problem? Where, let’s try to see. Some of the songs do not have lyrics, yet! So, when we try to scrape this <a href="https://www.musixmatch.com/lyrics/A-Tribe-Called-Red-ft-Black-Bear/Stadium-Pow-Wow">page</a> we get an error, as the text is not there.</p>
+<p>This is a rather common situation when scraping, as often what we are looking for is not there. Thus, we need a more safe approach. We can either write ad hoc <code>if ...else ...</code> statements, to control for the presence/absence of things, or (and it is better to do it anyhow) wrap our function into <code>purrr::possibly()</code> construct. We can do it by modifying just slightly our workflow. Notice that now we use <code>get_lyrics_safe()</code> inside the mapping instead of <code>get_lyrics()</code>.</p>
+<pre class="r"><code class="hljs">get_lyrics_safe &lt;- purrr::possibly(get_lyrics,<span class="hljs-literal">NA_character_</span>)
+
+get_words &lt;- <span class="hljs-keyword">function</span>(band_name){
+
+  <span class="hljs-comment"># remove white space from band name</span>
+  collapsed_name &lt;- str_replace_all(band_name, <span class="hljs-string">" "</span>, <span class="hljs-string">"-"</span>) 
+  
+  <span class="hljs-comment"># define url to get the title and links</span>
+  url &lt;- glue(<span class="hljs-string">"https://www.musixmatch.com/artist/{collapsed_name}"</span>)
+  
+  <span class="hljs-comment"># read title page and extract the title chunks </span>
+  title_page &lt;- url %&gt;%
+    read_html() %&gt;%
+    html_nodes(css = <span class="hljs-string">".title"</span>)
+  
+  <span class="hljs-comment"># and build the dataframe</span>
+  lyrics &lt;- data_frame(Band = band_name,
+                       <span class="hljs-comment"># extract text title</span>
+                       Title = title_page %&gt;%
+                           html_text(),
+                       <span class="hljs-comment"># extract title link</span>
+                       Link =  title_page %&gt;%
+                          html_attr(<span class="hljs-string">"href"</span>),
+                       <span class="hljs-comment"># map to get lyrics</span>
+                       Lyrics = map_chr(Link,get_lyrics_safe))
+  
+  <span class="hljs-keyword">return</span>(lyrics)
+}</code></pre>
+<p>Let’s try again:</p>
+<pre class="r"><code class="hljs">ATCR_words &lt;- <span class="hljs-string">"A Tribe Called Red"</span> %&gt;% get_words()</code></pre>
+<p>Much better.</p>
+<pre class="r"><code class="hljs">ATCR_sentiment &lt;- ATCR_words %&gt;% get_soul()</code></pre>
+<section id="challenge" class="level3">
+<h3>Challenge</h3>
+<p>Another singer you should, should, should listen to is <em>Militia Vox</em>. Try to replicate our work with her lyrics. What’s the problem? (If you think you get the answer, please discuss with me :-) )</p>
+<p><strong>note</strong>: this workthrough is loosely inspired by Max Humber’s <a href="https://www.r-bloggers.com/fantasy-hockey-with-rvest-and-purrr/">post</a> and David Laing’s post <a href="https://laingdk.github.io/kendrick-lamar-data-science/">here</a>. Great things are from them, errors are mine.</p>
+</section>
+</section>
+
+<div class="footer">
+This work is licensed under the  <a href="http://creativecommons.org/licenses/by-nc/3.0/">CC BY-NC 3.0 Creative Commons License</a>.
+</div>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+
+
+</body></html>
